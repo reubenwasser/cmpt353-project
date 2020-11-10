@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import random
 import wikipedia
 import pandas as pd
+from time import sleep
 
 # ANOTHER SCRIPT THAT I TRIED
 # def scrapeWikiArticle(url):
@@ -42,11 +43,14 @@ def getWikiAtrributes(DataFrame, Titles):
             print(e.options)
         except wikipedia.exceptions.PageError:
             print("Article not found for: " + article)
+        except requests.exceptions.ConnectionError:
+            requests.status_code = "Connection refused"
+            print(DataFrame)
+            sleep(30)
         try:
             DataFrame = DataFrame.append({'title': article, 'content': info.content, 'images': info.images, 'lat': info.coordinates[0], 'lng': info.coordinates[1]}, ignore_index=True)
         except:
-            print("Attributes missing for: " + article)
-        print(DataFrame)
+            print("Attributes missing for: " + article) 
     return(DataFrame)
     
 # Gets pages within a radius of 10 km (MAXIMUM) of the coordinates given
