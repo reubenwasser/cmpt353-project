@@ -62,6 +62,8 @@ df = pd.DataFrame(columns=['title', 'content', 'images', 'lat', 'lng' ])
 # Get attributes
 wikipediaAttributes = getWikiAtrributes(df, PAGES)
 
+print(wikipediaAttributes)
+
 # Save to CSV
 wikipediaAttributes.to_csv('wikipeadia.csv')
 
