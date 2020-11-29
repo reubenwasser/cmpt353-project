@@ -24,7 +24,8 @@ df = pd.DataFrame(image_list, columns = cols)
 
 
 def get_exif(filename):
-    image = Image.open(filename)
+    path = sys.argv[1]
+    image = Image.open(os.path.abspath(path + "/" + filename))
     image.verify()
     return image._getexif()
 
