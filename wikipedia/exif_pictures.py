@@ -3,6 +3,8 @@
 #citation:
 #source code taken from : https://developer.here.com/blog/getting-started-with-geocoding-exif-image-metadata-in-python3
 
+#test comment
+
 from PIL import Image
 from PIL.ExifTags import TAGS
 from PIL.ExifTags import GPSTAGS
