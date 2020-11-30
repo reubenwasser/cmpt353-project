@@ -1,9 +1,9 @@
-#!/usr/bin/env python
+
+
+#!/usr/bin/env python3
 
 #citation:
 #source code taken from : https://developer.here.com/blog/getting-started-with-geocoding-exif-image-metadata-in-python3
-
-#test comment
 
 from PIL import Image
 from PIL.ExifTags import TAGS
@@ -20,8 +20,8 @@ with os.scandir(file0) as entries:
     for entry in entries:
         image_list.append(entry.name)
       
-cols = ['name']
-df = pd.DataFrame(image_list, columns = cols)
+
+df = pd.DataFrame(image_list, columns = ['name'])
   
 
 
@@ -68,39 +68,23 @@ def get_coordinates(geotags):
     return (lat,lon)
 
 
+def get_lat(geotags):
+    lat = get_decimal_from_dms(geotags['GPSLatitude'], geotags['GPSLatitudeRef'])
+    return lat
+
+def get_lon(geotags):
+    lon = lon = get_decimal_from_dms(geotags['GPSLongitude'], geotags['GPSLongitudeRef'])
+    return lon
+
 df['exif'] = df['name'].apply(get_exif)
 df['geotags'] = df['exif'].apply(get_geotagging)
 df['coords'] = df['geotags'].apply(get_coordinates)
+df['lat'] = df['geotags'].apply(get_lat)
+df['lon'] = df['geotags'].apply(get_lon)
 
 from geopy.geocoders import Nominatim
 geolocator = Nominatim(user_agent="test_app")
 df['location'] = df['coords'].apply(geolocator.reverse)
 #print(df['location'].raw['display_name'])
 print(df['location'])
-#df.to_csv('file.csv')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+df.to_csv('image_locations.csv')
