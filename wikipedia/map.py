@@ -4,6 +4,7 @@
 
 import pandas as pd
 import folium
+import webbrowser
 import sys
 
 
@@ -27,6 +28,8 @@ def map_locations(df):
     
     #Generate Map
     m.save("path.html")
+    webbrowser.open("path.html")
+
     
 
 
