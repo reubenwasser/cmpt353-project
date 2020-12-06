@@ -1,7 +1,6 @@
 #uses the already generated 'joined_data.csv' to print out the locations user visited and
 #suggests all the nearby locations user could visit based on the dataset from the scraped values.
 
-
 #NOTE : using the pics2 as the sample for geotagged pictures.
 
 from geopy.geocoders import Nominatim
@@ -43,6 +42,7 @@ def recommendations():
         df['location_name'] = df.apply(lambda x: get_location(x.lat, x.lng, geoloc), axis=1)
         df['coords'] = df.apply(lambda x: get_coords(x.lat, x.lng), axis=1)
         df2['coords'] = df2.apply(lambda x: get_coords(x.lat, x.lon), axis=1)
+        print(df2)
         df.apply(lambda x: nearby_locations(x.coords, x.tourism, x.location_name, rec, df2, tour, places), axis = 1)
 
         data = {'distance':rec, 
@@ -53,15 +53,12 @@ def recommendations():
         df_rec = pd.DataFrame(data) 
         df_rec = df_rec.sort_values(by=['type'], ascending = True)
 
-
-
         #creating the dataframe with all the recommendations.
-        indexNames = df_rec[df_rec['distance'] <= 14]
-
+        indexNames = df_rec[df_rec['distance'] <= 1]
 
         print("Locations you visited : ")
         print(df2['location'], "\n")
-        print("Our reccomendations based on the locations you visited", "\n")
+        print("Our recommendations based on the locations you visited", "\n")
         print("Note for Team: Non-specific type reccomendations, Remove this once implemented")
         print(indexNames)
 

@@ -84,5 +84,5 @@ def exif_pictures(pictures):
     geolocator = Nominatim(user_agent="test_app")
     df['location'] = df['coords'].apply(geolocator.reverse)
     #print(df['location'].raw['display_name'])
-    #print(df['location'])
+    # print(df['location'])
     df.to_csv('./get_attractions/results/image_locations.csv')
