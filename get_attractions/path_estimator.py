@@ -52,15 +52,15 @@ def get_datetime(exif):
 
     
 
-def main():
+def path_estimator(image_file, location_file):
     #get folder containing all the pictures
-    image_file = sys.argv[1]
+    # image_file = sys.argv[1]
     
     #get csv file (output of exif_pictures.py) containing locations of the images
-    location_file = sys.argv[2]
+    #location_file = sys.argv[2]
     locations = pd.read_csv(location_file)
     locations = locations[['name','lat','lon','location']]
-    print(locations.info())
+    # print(locations.info())
     
     #create empty list which will contain the filename of all the pictures
     image_list = [] 
@@ -81,7 +81,7 @@ def main():
    
     #join locations data to the images_df on name column
     joined_data = images_df.join(locations.set_index('name'),on = 'name')
-    joined_data.to_csv('joined_data.csv')
+    joined_data.to_csv('./get_attractions/results/joined_data.csv')
     
     #sort the pictures based on order of time taken
     #this would give us the path taken by the user, 
@@ -90,7 +90,7 @@ def main():
     
     #print(sorted_images)
     
-    sorted_images.to_csv('sorted_images.csv')
+    sorted_images.to_csv('./get_attractions/results/sorted_images.csv')
     
     
     
@@ -101,5 +101,5 @@ some clever heuristic to estimate where it would fall in the sequence of locatio
 
 '''
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()

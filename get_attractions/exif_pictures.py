@@ -12,19 +12,6 @@ import sys
 import os
 import pandas as pd
 
-file0 = sys.argv[1]
-
-image_list = []
-
-with os.scandir(file0) as entries:
-    for entry in entries:
-        image_list.append(entry.name)
-      
-
-df = pd.DataFrame(image_list, columns = ['name'])
-  
-
-
 def get_exif(filename):
     path = sys.argv[1]
     image = Image.open(os.path.abspath(path + "/" + filename))
@@ -76,15 +63,26 @@ def get_lon(geotags):
     lon = lon = get_decimal_from_dms(geotags['GPSLongitude'], geotags['GPSLongitudeRef'])
     return lon
 
-df['exif'] = df['name'].apply(get_exif)
-df['geotags'] = df['exif'].apply(get_geotagging)
-df['coords'] = df['geotags'].apply(get_coordinates)
-df['lat'] = df['geotags'].apply(get_lat)
-df['lon'] = df['geotags'].apply(get_lon)
+def exif_pictures(pictures):
 
-from geopy.geocoders import Nominatim
-geolocator = Nominatim(user_agent="test_app")
-df['location'] = df['coords'].apply(geolocator.reverse)
-#print(df['location'].raw['display_name'])
-print(df['location'])
-df.to_csv('image_locations.csv')
+    image_list = []
+
+    with os.scandir(pictures) as entries:
+        for entry in entries:
+            image_list.append(entry.name)
+        
+
+    df = pd.DataFrame(image_list, columns = ['name'])
+
+    df['exif'] = df['name'].apply(get_exif)
+    df['geotags'] = df['exif'].apply(get_geotagging)
+    df['coords'] = df['geotags'].apply(get_coordinates)
+    df['lat'] = df['geotags'].apply(get_lat)
+    df['lon'] = df['geotags'].apply(get_lon)
+
+    from geopy.geocoders import Nominatim
+    geolocator = Nominatim(user_agent="test_app")
+    df['location'] = df['coords'].apply(geolocator.reverse)
+    #print(df['location'].raw['display_name'])
+    #print(df['location'])
+    df.to_csv('./get_attractions/results/image_locations.csv')
