@@ -1,17 +1,26 @@
-# cmpt353-project
-Computational Data Science Final Project
+# WhereShouldIHaveGone: Vancouver Edition
+**CMPT 353 Final Project created by Reuben Wasser, Supriya and Saheba**
 
 
+### Project Description:
+This project is a CLI program designed to give recommendations for places to visit for the user within Vancouver.
+The program takes a file of **geotagged** photos and returns a list of recommendations for where the user should visit next based on proximity to the location of the photos taken.
 
-### Workflow:
+### Setup:
+Clone the repository:
+
+`git clone https://github.com/rubadub13/cmpt353-project`
+
+To set up the project and install all dependencies go into the root directory of the project and run:
+
+ `./install.sh`
+
+### Usage
+
+Take your folder of geotagged photos and move it into the root directory of the `cmpt353-project`
+
+Now simply run:`WhereShouldIHaveGone [photos]` 
+ 
+And see what places get recommended!
 
 
-1. Webscraping to combine attribute from OSM and Wikipedia
-2. User inputs - UI and functionality
-   1. POI (Point of Interest) category
-   2. Distance
-   3. Mode of transportation
-   4. Others?
-3. Provide list of recommended destinations
-4. Display results on a map created by geopandas
-5. Explore ML methods to provide more accurate output

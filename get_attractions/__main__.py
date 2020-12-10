@@ -14,13 +14,7 @@ def main():
     exif_pictures(arg)
     path_estimator(arg, "./get_attractions/results/image_locations.csv")
     recommendations()
-    #map_locations("./get_attractions/results/sorted_images.csv")
-
-
-    # my_function('hello world')
-
-    # my_object = MyClass('Thomas')
-    # my_object.say_name()
+    map_locations("./get_attractions/results/sorted_images.csv")
 
 if __name__ == '__main__':
     main()

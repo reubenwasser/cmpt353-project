@@ -5,33 +5,6 @@ import wikipedia
 import pandas as pd
 from time import sleep
 
-# ANOTHER SCRIPT THAT I TRIED
-# def scrapeWikiArticle(url):
-# 	response = requests.get(
-# 		url=url,
-# 	)
-	
-# 	soup = BeautifulSoup(response.content, 'html.parser')
-
-# 	title = soup.find(id="firstHeading")
-# 	print(title.text)
-
-# 	allLinks = soup.find(id="bodyContent").find_all("a")
-# 	random.shuffle(allLinks)
-# 	linkToScrape = 0
-
-# 	for link in allLinks:
-# 		# We are only interested in other wiki articles
-# 		if link['href'].find("/wiki/") == -1: 
-# 			continue
-
-# 		# Use this link to scrape
-# 		linkToScrape = link
-# 		break
-
-# 	scrapeWikiArticle("https://en.wikipedia.org" + linkToScrape['href'])
-
-
 
 # Goes through each wikipadia page in the array of titles and gets title, content, image url, lat and long attributes and returns this as a dataframe
 def getWikiAtrributes(DataFrame, Titles):
@@ -65,6 +38,6 @@ wikipediaAttributes = getWikiAtrributes(df, PAGES)
 print(wikipediaAttributes)
 
 # Save to CSV
-wikipediaAttributes.to_csv('wikipeadia.csv')
+wikipediaAttributes.to_csv('../../data/wikipedia.csv')
 
 

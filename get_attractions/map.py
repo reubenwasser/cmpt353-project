@@ -19,7 +19,7 @@ def map_locations(sorted_images):
     # Create a list of latitude and longitude pairs
     locations = df[['lat','lon']]
     list_of_locations = locations.values.tolist()
-    
+
     # Add markers to the map
     for location in range(len(list_of_locations)):
         folium.Marker(list_of_locations[location], popup = df['location'][location]).add_to(m)
