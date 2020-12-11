@@ -1,5 +1,5 @@
 # WhereShouldIHaveGone: Vancouver Edition
-**CMPT 353 Final Project created by Reuben Wasser, Supriya and Saheba**
+**CMPT 353 Final Project created by Reuben Wasser, Supriya and Saheba Tegally**
 
 
 ### Project Description:
