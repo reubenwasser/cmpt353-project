@@ -6,15 +6,15 @@ import sys
 import pandas as pd
 import re
 
-print(" For specific categories enter category out of the listed ones, for all types of reccomendations type 'None' ", "\n")
+print("This program will plot the locations you've already visited on a map, and will give you reccomendations of places you can visit based on the picture folder you enter. ", "\n")
+print("Categories we have", "\n")
 print("  -> Botanical gardens, -> Aquarium", "\n",
 " -> Attraction, -> Artwork", "\n",
 " -> Hotel, ->  Museum", "\n", 
 " -> Viewpoint", "\n")
-#val = input("Enter your value: ") 
-#print(val)
-val2 = input("Enter number")
-val2 = float(val2)
+
+val = input("Enter the distance you're willing to go for some exploring! ")
+val = float(val)
 
 
 
@@ -32,14 +32,7 @@ def nearby_locations(pt, typep, place, rec, df2, tour, places):
                 rec.append(haversine(pt, j))
                 tour.append(typep)
                 places.append(place)
-  
-
-
-def matching(typeo):
-        if typeo == val:  
-          return 1
-        else:
-          return 0   
+   
 
 def recommendations():
         print("This might take some time... but we try our best :)")
@@ -53,6 +46,10 @@ def recommendations():
         rec = []
         tour = []
         places = [] 
+        
+        
+        print("Locations you visited : ", "\n")
+        print(df2['location'], "\n")
         
         #get all the resulting columns.
         df['location_name'] = df.apply(lambda x: get_location(x.lat, x.lng, geoloc), axis=1)
@@ -71,26 +68,12 @@ def recommendations():
         df_rec = df_rec.sort_values(by=['type'], ascending = True)
 
         #creating the dataframe with all the recommendations.
-        indexNames = df_rec[df_rec['distance'] <= val2]
+        indexNames = df_rec[df_rec['distance'] <= val]
         indexNames = indexNames.reset_index(drop = True)
         
         
-        
         indexNames['location'] = indexNames['location'].astype('str')
-        #indexNames['result'] = indexNames['type'].apply(matching)
-        
-        
-        
-        
-        #labels = []
-        #labels.append('result')
-        #labels.append('distance')
-        
-        
-        #indexNames = indexNames.loc[lambda x: x.result == 0] 
-        
-             
-
+     
         #print("Locations you visited : ")
         #print(df2['location'], "\n")
         indexNames = indexNames.drop_duplicates(subset = 'location',keep = 'first')

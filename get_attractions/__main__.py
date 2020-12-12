@@ -5,11 +5,11 @@ from .recommendations import recommendations
 from .map import map_locations
 
 def main():
-    print('in main')
+    
     args = sys.argv[1:]
-    print('count of args :: {}'.format(len(args)))
+    
     for arg in args:
-        print('passed argument :: {}'.format(arg))
+        print('passed folder - {}'.format(arg))
 
     exif_pictures(arg)
     path_estimator(arg, "./get_attractions/results/image_locations.csv")
