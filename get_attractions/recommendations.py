@@ -77,9 +77,16 @@ def recommendations():
         #print("Locations you visited : ")
         #print(df2['location'], "\n")
         indexNames = indexNames.drop_duplicates(subset = 'location',keep = 'first')
-        print("Our recommendations based on the locations you visited", "\n")
-        with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also
-              print(indexNames)
+
+        if(indexNames.empty == True):
+                print("No recommendation found, maybe try a larger radius.")
+
+        else:
+                print("Our recommendations based on the locations you visited", "\n")
+                with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also
+                        print(indexNames)
+                        print("To see full results open results.csv")
+                        indexNames.to_csv("results.csv")
 
 
 
